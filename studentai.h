@@ -15,6 +15,8 @@ struct mokinys
 double vidurkissk(std::vector<double>&);
 double mediana(std::vector<double>&);
 void outputcons(std::string, std::string, std::vector<double>&, double);
-void outputfile(std::vector<mokinys>&, std::vector<mokinys>&, std::vector<mokinys>&);
+void outputfile(std::vector<mokinys>&, std::vector<mokinys>&, std::vector<mokinys>&,bool);
 void generavimasfailo(int&);
+void sortas(std::vector<mokinys>&);
+bool sortByLastName(const mokinys&, const mokinys&);
 #endif // !STUDENTAI_H

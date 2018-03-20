@@ -54,17 +54,19 @@ void outputcons(std::string vardas, std::string pavarde, std::vector<double>& pa
 	galBalas = 0.4*vidurkis + 0.6*egz;
 	std::cout << std::fixed << std::setprecision(2) << galBalas << std::endl;
 }
-bool comparebyalph(mokinys &a, mokinys &b)
+
+bool sortByLastName(const mokinys &a, const mokinys &b)
 {
-	return a.vardas < b.vardas;
+	return a.pavarde < b.pavarde;
 }
-void outputfile(std::vector<mokinys>& a,std::vector<mokinys>& prileisti, std::vector<mokinys>& neprileisti)
+void sortas(std::vector<mokinys>& a)
 {
-	std::ofstream out("rez.txt");
-	bool metodas;
+	std::sort(a.begin(), a.end(), sortByLastName);
+}
+void outputfile(std::vector<mokinys>& a,std::vector<mokinys>& prileisti, std::vector<mokinys>& neprileisti,bool metodas)
+{
 	double vidurkis{};
-	std::cout << "Pazymiu skaiciavimo budas: mediana(0) arba vidurkis(1)" << std:: endl;
-	std::cin >> metodas;
+	std::ofstream out("rez.txt");
 	for (auto i = 0; i<a.size(); i++)
 	{
 		if (metodas == 1)
