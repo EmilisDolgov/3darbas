@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cmath>
 #include <iomanip>
+#include <random>
+#include <algorithm>
 
 double vidurkissk(std::vector<double>& paz)
 {
@@ -52,6 +54,10 @@ void outputcons(std::string vardas, std::string pavarde, std::vector<double>& pa
 	galBalas = 0.4*vidurkis + 0.6*egz;
 	std::cout << std::fixed << std::setprecision(2) << galBalas << std::endl;
 }
+bool comparebyalph(mokinys &a, mokinys &b)
+{
+	return a.vardas < b.vardas;
+}
 void outputfile(std::vector<mokinys>& a,std::vector<mokinys>& prileisti, std::vector<mokinys>& neprileisti)
 {
 	std::ofstream out("rez.txt");
@@ -77,4 +83,22 @@ void outputfile(std::vector<mokinys>& a,std::vector<mokinys>& prileisti, std::ve
 		out << std::fixed << std::setprecision(2) << a[i].galBal << std::endl;
 		std::setprecision(0);
 	}
+}
+void generavimasfailo(int& n)
+{
+	std::ofstream out("kursiokai.txt");
+	int m = 5;
+	std::random_device rd;  //Will be used to obtain a seed for the random number engine
+	std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+	std::uniform_int_distribution<> dis(1, 10);
+	for (auto i = 0; i < n; i++)
+	{	
+		out << "Vardas" + std::to_string(i) << " ";
+		out << "Pavarde" + std::to_string(i) << " ";
+		for (auto j = 0; j < m; j++)
+			out << dis(gen) << " ";
+		out << dis(gen) << std::endl;		
+	}
+	out.close();
+
 }

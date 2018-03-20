@@ -1,2 +1,5 @@
-Jonas Kitas 8 10 9 10 10 5
-Nicolas Jaar 8 10 9 10 10 6
+Vardas0 Pavarde0 4 10 10 4 7 1
+Vardas1 Pavarde1 9 2 5 9 9 4
+Vardas2 Pavarde2 7 1 6 7 6 7
+Vardas3 Pavarde3 9 6 5 7 8 2
+Vardas4 Pavarde4 2 3 8 9 6 5

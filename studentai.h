@@ -16,4 +16,5 @@ double vidurkissk(std::vector<double>&);
 double mediana(std::vector<double>&);
 void outputcons(std::string, std::string, std::vector<double>&, double);
 void outputfile(std::vector<mokinys>&, std::vector<mokinys>&, std::vector<mokinys>&);
+void generavimasfailo(int&);
 #endif // !STUDENTAI_H
