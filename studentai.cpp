@@ -5,18 +5,18 @@
 #include <cmath>
 #include <iomanip>
 #include <random>
-#include <algorithm>
+#include <list>
 
-double vidurkissk(std::vector<double>& paz)
+double vidurkissk(std::list<double>& paz)
 {
 	double sum{};
-	for (auto i = 0; i < paz.size(); i++)
+	for (auto i:paz)
 	{
-		sum += paz[i];
+		sum += i;
 	}
 	return sum / paz.size();
 }
-double mediana(std::vector<double>& paz)
+/*double mediana(std::list<double>& paz)
 {
 	double temp;
 	for (auto i = 0; i < paz.size(); i++)
@@ -35,8 +35,8 @@ double mediana(std::vector<double>& paz)
 		return paz[(paz.size() / 2 + 1) - 1];
 	else
 		return (paz[(paz.size() / 2) - 1] + paz[(paz.size() / 2 + 1) - 1]) / 2;
-}
-void outputcons(std::string vardas, std::string pavarde, std::vector<double>& paz, double egz)
+}*/
+void outputcons(std::string vardas, std::string pavarde, std::list<double>& paz, double egz)
 {
 	bool metodas;
 	double vidurkis{};
@@ -44,12 +44,12 @@ void outputcons(std::string vardas, std::string pavarde, std::vector<double>& pa
 	std::cin >> metodas;
 	if (metodas == 1)
 		vidurkis = vidurkissk(paz);
-	else if (metodas == 0)
-		vidurkis = mediana(paz);
+	//else if (metodas == 0)
+		//vidurkis = mediana(paz);
 	double galBalas{};
 	std::cout << vardas << " " << pavarde << " ";
-	for (auto i = 0; i < paz.size(); i++)
-		std::cout << paz[i] << " ";
+	for (auto i : paz)
+		std::cout << i << " ";
 	std::cout << std::endl;
 	galBalas = 0.4*vidurkis + 0.6*egz;
 	std::cout << std::fixed << std::setprecision(2) << galBalas << std::endl;
@@ -57,33 +57,31 @@ void outputcons(std::string vardas, std::string pavarde, std::vector<double>& pa
 
 bool sortByLastName(const mokinys &a, const mokinys &b)
 {
-	return a.pavarde < b.pavarde;
+	return a.pavarde > b.pavarde;
 }
-void sortas(std::vector<mokinys>& a)
-{
-	std::sort(a.begin(), a.end(), sortByLastName);
-}
-void outputfile(std::vector<mokinys>& a,std::vector<mokinys>& prileisti, std::vector<mokinys>& neprileisti,bool metodas)
+void outputfile(std::list<mokinys>& a,std::list<mokinys>& prileisti, std::list<mokinys>& neprileisti,bool metodas)
 {
 	double vidurkis{};
 	std::ofstream out("rez.txt");
-	for (auto i = 0; i<a.size(); i++)
+	for (auto i:a)
 	{
 		if (metodas == 1)
-			vidurkis = vidurkissk(a[i].paz);
+			vidurkis = vidurkissk(i.paz);
 		else if (metodas == 0)
-			vidurkis = mediana(a[i].paz);
+			//vidurkis = mediana(i.paz);
 		if (vidurkis >= 6)
-			prileisti.push_back(a[i]);
+			prileisti.push_back(i);
 		else if (vidurkis < 6)
-			neprileisti.push_back(a[i]);
-		out << a[i].vardas << " " << a[i].pavarde << " ";
-		for (auto j = 0; j < a[i].paz.size(); j++)
-			out << a[i].paz[j] << " ";
+			neprileisti.push_back(i);
+		out << i.vardas << " " << i.pavarde << " ";
+		for (auto j:i.paz)
+			out << j << " ";
 		out << std::endl;
-		a[i].galBal = 0.4*vidurkis + 0.6*a[i].egz;
-		out << std::fixed << std::setprecision(2) << a[i].galBal << std::endl;
+		i.galBal = 0.4*vidurkis + 0.6*i.egz;
+		out << std::fixed << std::setprecision(2) << i.galBal << std::endl;
 		std::setprecision(0);
+		prileisti.clear();
+		neprileisti.clear();
 	}
 }
 void generavimasfailo(int& n)
