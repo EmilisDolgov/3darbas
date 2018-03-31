@@ -7,7 +7,7 @@
 #include <random>
 #include <list>
 
-double vidurkissk(std::list<double>& paz)
+double vidurkissk(std::deque<double>& paz)
 {
 	double sum{};
 	for (auto i:paz)
@@ -36,12 +36,22 @@ double vidurkissk(std::list<double>& paz)
 	else
 		return (paz[(paz.size() / 2) - 1] + paz[(paz.size() / 2 + 1) - 1]) / 2;
 }*/
-void outputcons(std::string vardas, std::string pavarde, std::list<double>& paz, double egz)
+void outputcons(std::string vardas, std::string pavarde, std::deque<double>& paz, double egz)
 {
 	bool metodas;
 	double vidurkis{};
 	std::cout << "Pazymiu skaiciavimo budas: mediana(0) arba vidurkis(1)" << std::endl;
-	std::cin >> metodas;
+	try
+	{
+		std::cin >> metodas;
+		if (metodas != 0 || metodas != 1)
+			throw 1;
+	}
+	catch (int a)
+	{
+		std::cout << "Iveskite 0 arba 1" << std::endl;
+		exit(a);
+	}
 	if (metodas == 1)
 		vidurkis = vidurkissk(paz);
 	//else if (metodas == 0)
@@ -59,7 +69,7 @@ bool sortByLastName(const mokinys &a, const mokinys &b)
 {
 	return a.pavarde > b.pavarde;
 }
-void outputfile(std::list<mokinys>& a,std::list<mokinys>& prileisti, std::list<mokinys>& neprileisti,bool metodas)
+void outputfile(std::deque<mokinys>& a,std::deque<mokinys>& prileisti, std::deque<mokinys>& neprileisti,bool metodas)
 {
 	double vidurkis{};
 	std::ofstream out("rez.txt");
@@ -80,9 +90,8 @@ void outputfile(std::list<mokinys>& a,std::list<mokinys>& prileisti, std::list<m
 		i.galBal = 0.4*vidurkis + 0.6*i.egz;
 		out << std::fixed << std::setprecision(2) << i.galBal << std::endl;
 		std::setprecision(0);
-		prileisti.clear();
-		neprileisti.clear();
 	}
+	out.close();
 }
 void generavimasfailo(int& n)
 {

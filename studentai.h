@@ -2,20 +2,20 @@
 #define STUDENTAI_H
 
 #include <string>
-#include <list>
+#include <deque>
 
 struct mokinys
 {
 	std::string vardas;
 	std::string pavarde;
-	std::list<double> paz;
+	std::deque<double> paz;
 	double egz;
 	double galBal;
 };
-double vidurkissk(std::list<double>&);
-double mediana(std::list<double>&);
-void outputcons(std::string, std::string, std::list<double>&, double);
-void outputfile(std::list<mokinys>&, std::list<mokinys>&, std::list<mokinys>&,bool);
+double vidurkissk(std::deque<double>&);
+double mediana(std::deque<double>&);
+void outputcons(std::string, std::string, std::deque<double>&, double);
+void outputfile(std::deque<mokinys>&, std::deque<mokinys>&, std::deque<mokinys>&,bool);
 void generavimasfailo(int&);
 bool sortByLastName(const mokinys&,const mokinys&);
 #endif // !STUDENTAI_H
