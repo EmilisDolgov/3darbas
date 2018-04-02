@@ -5,9 +5,9 @@
 #include <cmath>
 #include <iomanip>
 #include <random>
-#include <vector>
+#include <deque>
 
-double vidurkissk(std::vector<double>& paz)
+double vidurkissk(std::deque<double>& paz)
 {
 	double sum{};
 	for (auto i:paz)
@@ -36,7 +36,7 @@ double vidurkissk(std::vector<double>& paz)
 	else
 		return (paz[(paz.size() / 2) - 1] + paz[(paz.size() / 2 + 1) - 1]) / 2;
 }*/
-void outputcons(std::string vardas, std::string pavarde, std::vector<double>& paz, double egz)
+void outputcons(std::string vardas, std::string pavarde, std::deque<double>& paz, double egz)
 {
 	bool metodas;
 	double vidurkis{};
@@ -69,10 +69,10 @@ bool sortByLastName(const mokinys &a, const mokinys &b)
 {
 	return a.pavarde > b.pavarde;
 }
-void skirstimas(std::vector<mokinys>& a, bool metodas, double& vidurkis)
+void skirstimas(std::deque<mokinys>& a, bool metodas, double& vidurkis)
 {
-	std::vector<mokinys> prileisti{};
-	std::vector<mokinys> neprileisti{};
+	std::deque<mokinys> prileisti{};
+	std::deque<mokinys> neprileisti{};
 	auto k = 0;
 	for (auto i : a)
 	{
@@ -85,7 +85,7 @@ void skirstimas(std::vector<mokinys>& a, bool metodas, double& vidurkis)
 	}
 	k++;
 }
-void outputfile(std::vector<mokinys>& a,bool metodas,double vidurkis)
+void outputfile(std::deque<mokinys>& a,bool metodas,double vidurkis)
 {
 	std::ofstream out("rez.txt");
 	for(auto i:a)
