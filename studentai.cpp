@@ -74,7 +74,7 @@ void skirstimas(std::list<mokinys>& a, bool metodas, double& vidurkis)
 {
 	std::list<mokinys> neprileisti{};
     std::list<mokinys> prileisti{};
-	for (auto i : a)
+	/*for (auto i : a)
 	{
 		if (metodas == 1)
 			vidurkis = vidurkissk(i.paz);
@@ -84,8 +84,8 @@ void skirstimas(std::list<mokinys>& a, bool metodas, double& vidurkis)
 		}
 		else if (vidurkis >= 6)
 			prileisti.push_back(i);
-	}
-	/*for (auto i = a.begin(); i != a.end();) 
+	}*/
+	for (auto i = a.begin(); i != a.end();) 
 	{
 		if (metodas == 1)
 			vidurkis = vidurkissk((*i).paz);
@@ -96,7 +96,7 @@ void skirstimas(std::list<mokinys>& a, bool metodas, double& vidurkis)
 		}	
 		else
 			++i;
-	}*/
+	}
 }
 void outputfile(std::list<mokinys>& a,bool metodas,double vidurkis)
 {
