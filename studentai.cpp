@@ -3,10 +3,12 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
+#include <sstream>
 #include <iomanip>
 #include <iterator>
 #include <random>
 #include <list>
+#include <chrono>
 
 double vidurkissk(std::list<double>& paz)
 {
@@ -17,78 +19,59 @@ double vidurkissk(std::list<double>& paz)
 	}
 	return sum / paz.size();
 }
-/*double mediana(std::list<double>& paz)
+void skaitymasfailo(std::list<mokinysl>& a,int n)
 {
-	double temp;
-	for (auto i = 0; i < paz.size(); i++)
-	{
-		for (auto j = 0; j < paz.size() - 1; j++)
-		{
-			if (paz[j] > paz[j + 1])
-			{
-				temp = paz[j];
-				paz[j] = paz[j + 1];
-				paz[j + 1] = temp;
-			}
-		}
-	}
-	if (paz.size() % 2 == 1)
-		return paz[(paz.size() / 2 + 1) - 1];
-	else
-		return (paz[(paz.size() / 2) - 1] + paz[(paz.size() / 2 + 1) - 1]) / 2;
-}*/
-void outputcons(std::string vardas, std::string pavarde, std::list<double>& paz, double egz)
-{
-	bool metodas;
-	double vidurkis{};
-	std::cout << "Pazymiu skaiciavimo budas: mediana(0) arba vidurkis(1)" << std::endl;
+	std::ifstream in("kursiokai"+std::to_string(n)+".txt");
+	mokinysl tempm{};
 	try
 	{
-		std::cin >> metodas;
-		if (metodas != 0 && metodas != 1)
-			throw 1;
+		if (!in.good()) throw 1;
+		else if (in.peek() == std::ifstream::traits_type::eof()) throw 0;
 	}
-	catch (int a)
+	catch (int n)
 	{
-		std::cout << "Iveskite 0 arba 1" << std::endl;
-		exit(a);
+		if (n == 1)
+			std::cout << "Failas nerastas" << std::endl;
+		else if (n == 0)
+			std::cout << "Failas tuscias" << std::endl;
 	}
-	if (metodas == 1)
-		vidurkis = vidurkissk(paz);
-	//else if (metodas == 0)
-		//vidurkis = mediana(paz);
-	double galBalas{};
-	std::cout << vardas << " " << pavarde << " ";
-	for (auto i : paz)
-		std::cout << i << " ";
-	std::cout << std::endl;
-	galBalas = 0.4*vidurkis + 0.6*egz;
-	std::cout << std::fixed << std::setprecision(2) << galBalas << std::endl;
+	for (auto i = 0; i<n; i++)
+	{
+		in >> tempm.vardas >> tempm.pavarde;
+		std::string line;
+		std::getline(in, line);
+		std::istringstream iss(line);
+		double temp;
+		while (iss >> temp)
+			tempm.paz.push_back(temp);
+		temp = tempm.paz.back();
+		tempm.egz = temp;
+		tempm.paz.pop_back();
+		a.push_back(tempm);
+		tempm.paz.clear();
+	}
+	in.close();
 }
-
-bool sortByLastName(const mokinys &a, const mokinys &b)
+bool sortByLastNameL(const mokinysl &a, const mokinysl &b)
 {
 	return a.pavarde > b.pavarde;
 }
-void skirstimas(std::list<mokinys>& a, bool metodas, double& vidurkis)
+void skirstimas(std::list<mokinysl>& a, double& vidurkis)
 {
-	std::list<mokinys> neprileisti{};
-    std::list<mokinys> prileisti{};
-	/*for (auto i : a)
+	std::list<mokinysl> neprileisti{};
+    std::list<mokinysl> prileisti{};
+	for (auto i : a)
 	{
-		if (metodas == 1)
-			vidurkis = vidurkissk(i.paz);
+		vidurkis = vidurkissk(i.paz);
 		if (vidurkis < 6)
-		{
 			neprileisti.push_back(i);
-		}
 		else if (vidurkis >= 6)
 			prileisti.push_back(i);
-	}*/
+	}
+	/*
 	for (auto i = a.begin(); i != a.end();) 
 	{
-		if (metodas == 1)
-			vidurkis = vidurkissk((*i).paz);
+		vidurkis = vidurkissk((*i).paz);
 		if (vidurkis < 6)
 		{
 			neprileisti.push_back((*i));
@@ -97,10 +80,11 @@ void skirstimas(std::list<mokinys>& a, bool metodas, double& vidurkis)
 		else
 			++i;
 	}
+	*/
 }
-void outputfile(std::list<mokinys>& a,bool metodas,double vidurkis)
+void outputfile(std::list<mokinysl>& a,double vidurkis)
 {
-	std::ofstream out("rez.txt");
+	std::ofstream out("rez"+std::to_string(a.size())+".txt");
 	for(auto i:a)
 	{
 		out << i.vardas << " " << i.pavarde << " ";
@@ -112,10 +96,11 @@ void outputfile(std::list<mokinys>& a,bool metodas,double vidurkis)
 		std::setprecision(0);
 	}
 	out.close();
+	a.clear();
 }
-void generavimasfailo(int& n)
+void generavimasfailo(int n)
 {
-	std::ofstream out("kursiokai.txt");
+	std::ofstream out("kursiokai"+std::to_string(n)+".txt");
 	int m = 5;
 	std::random_device rd;  //Will be used to obtain a seed for the random number engine
 	std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
@@ -130,4 +115,24 @@ void generavimasfailo(int& n)
 	}
 	out.close();
 
+}
+void timedgen(int n)
+{
+	auto start = std::chrono::high_resolution_clock::now();
+	generavimasfailo(n);
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	std::cout << "Failo generavimo laikas: " << elapsed.count() << "s" <<std::endl;
+}
+void timedproc(std::list<mokinysl>& a, double vidurkis, int n)
+{
+	skaitymasfailo(a, n);
+	auto start = std::chrono::high_resolution_clock::now();
+	//std::sort(a.begin(), a.end(), sortByLastName);
+	a.sort(sortByLastNameL);
+	skirstimas(a, vidurkis);
+	outputfile(a, vidurkis);
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	std::cout << "(L)Duomenu suskirtimo ir isvedimo laikas: " << elapsed.count() << "s" << std::endl;
 }
