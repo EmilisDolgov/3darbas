@@ -16,7 +16,7 @@ Pirmoji programa
 * Studentų skirstymas į prileistus prie egzamino ir neprileistus
 # [v1.0](https://github.com/EmilisDolgov/PirmasDarbas/releases/tag/v1.0)
 * Pridėtas README.md failas
-
-
-
-
+# [v1.1](https://github.com/EmilisDolgov/PirmasDarbas/releases/tag/v1.1)
+* Programa optimizuota
+* Ištrintas rankinis output'as
+* Pridėta daugiau algoritmų, veikia daug greičiau.
