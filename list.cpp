@@ -42,97 +42,74 @@ void skaitymasfailo(std::list<mokinysl>& a,int n)
 		std::getline(in, line);
 		std::istringstream iss(line);
 		double temp;
+		std::deque<double> paz;
 		while (iss >> temp)
-			tempm.paz.push_back(temp);
-		temp = tempm.paz.back();
-		tempm.egz = temp;
-		tempm.paz.pop_back();
+			paz.push_back(temp);
+		tempm.egz = paz.back();
+		tempm.vidurkis = vidurkissk(paz);
 		a.push_back(tempm);
-		tempm.paz.clear();
 	}
 	in.close();
 }
-bool sortByLastNameL(const mokinysl &a, const mokinysl &b)
+bool sortByLastNameL(mokinysl& a,  mokinysl& b)
 {
 	return a.pavarde > b.pavarde;
 }
-void skirstimas(std::list<mokinysl>& a, double& vidurkis)
+bool jeiNeprileistas(mokinysl &a)
+{
+	return a.vidurkis < 6;
+}
+void skirstimas(std::list<mokinysl>& a)
 {
 	std::list<mokinysl> neprileisti{};
     std::list<mokinysl> prileisti{};
 	for (auto i : a)
 	{
-		vidurkis = vidurkissk(i.paz);
-		if (vidurkis < 6)
+		if (i.vidurkis < 6)
 			neprileisti.push_back(i);
-		else if (vidurkis >= 6)
+		else if (i.vidurkis >= 6)
 			prileisti.push_back(i);
 	}
-	/*
-	for (auto i = a.begin(); i != a.end();) 
-	{
-		vidurkis = vidurkissk((*i).paz);
-		if (vidurkis < 6)
-		{
-			neprileisti.push_back((*i));
-			i = a.erase(i);
-		}	
-		else
-			++i;
-	}
-	*/
+
 }
-void outputfile(std::list<mokinysl>& a,double vidurkis)
+void skirstimasistrinant(std::list<mokinysl>& a)
+{
+	std::list<mokinysl> neprileisti{};
+	copy_if(a.begin(), a.end(), back_inserter(neprileisti), jeiNeprileistas);
+	a.erase(remove_if(a.begin(), a.end(), jeiNeprileistas), a.end());
+}
+void outputfile(std::list<mokinysl>& a)
 {
 	std::ofstream out("rez"+std::to_string(a.size())+".txt");
 	for(auto i:a)
 	{
 		out << i.vardas << " " << i.pavarde << " ";
-		for (auto j:i.paz)
-			out << j << " ";
-		out << std::endl;
-		i.galBal = 0.4*vidurkis + 0.6*i.egz;
+		i.galBal = 0.4*i.vidurkis + 0.6*i.egz;
 		out << std::fixed << std::setprecision(2) << i.galBal << std::endl;
 		std::setprecision(0);
 	}
 	out.close();
 	a.clear();
 }
-void generavimasfailo(int n)
-{
-	std::ofstream out("kursiokai"+std::to_string(n)+".txt");
-	int m = 5;
-	std::random_device rd;  //Will be used to obtain a seed for the random number engine
-	std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-	std::uniform_int_distribution<> dis(1, 10);
-	for (auto i = 0; i < n; i++)
-	{	
-		out << "Vardas" + std::to_string(i) << " ";
-		out << "Pavarde" + std::to_string(i) << " ";
-		for (auto j = 0; j < m; j++)
-			out << dis(gen) << " ";
-		out << dis(gen) << std::endl;		
-	}
-	out.close();
-
-}
-void timedgen(int n)
-{
-	auto start = std::chrono::high_resolution_clock::now();
-	generavimasfailo(n);
-	auto finish = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "Failo generavimo laikas: " << elapsed.count() << "s" <<std::endl;
-}
-void timedproc(std::list<mokinysl>& a, double vidurkis, int n)
+void timedproc(std::list<mokinysl>& a, int n)
 {
 	skaitymasfailo(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
-	//std::sort(a.begin(), a.end(), sortByLastName);
-	a.sort(sortByLastNameL);
-	skirstimas(a, vidurkis);
-	outputfile(a, vidurkis);
+    //a.sort(sortByLastNameL);
+	skirstimas(a);
+	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
-	std::cout << "(L)Duomenu suskirtimo ir isvedimo laikas: " << elapsed.count() << "s" << std::endl;
+	std::cout << "[L/3c]Duomenu suskirtimo ir isvedimo laikas: " << elapsed.count() << "s" << std::endl;
+}
+void timedprocwdel(std::list<mokinysl>& a, int n)
+{
+	skaitymasfailo(a, n);
+	auto start = std::chrono::high_resolution_clock::now();
+	//a.sort(sortByLastNameL);
+	skirstimasistrinant(a);
+	outputfile(a);
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	std::cout << "[L/2c]Duomenu suskirtimo ir isvedimo laikas: " << elapsed.count() << "s" << std::endl;
 }

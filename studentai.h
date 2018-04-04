@@ -10,42 +10,53 @@ struct mokinysl
 {
 	std::string vardas;
 	std::string pavarde;
-	std::list<double> paz;
 	double egz;
+	double vidurkis;
 	double galBal;
 };
 struct mokinysd
 {
 	std::string vardas;
 	std::string pavarde;
-	std::deque<double> paz;
 	double egz;
+	double vidurkis;
 	double galBal;
 };
 struct mokinysv
 {
 	std::string vardas;
 	std::string pavarde;
-	std::vector<double> paz;
 	double egz;
+	double vidurkis;
 	double galBal;
 };
 double vidurkissk(std::list<double>&);
-void outputfile(std::list<mokinysl>&,double);
-void skirstimas(std::list<mokinysl>&,double&);
-bool sortByLastNameL(const mokinysl&,const mokinysl&);
+void outputfile(std::list<mokinysl>&);
+void skirstimas(std::list<mokinysl>&);
+void skirstimasistrinant(std::list<mokinysl>&);
+bool sortByLastNameL(mokinysl&, mokinysl&);
 void skaitymasfailo(std::list<mokinysl>&,int);
-void timedgen(int);
-void timedproc(std::list<mokinysl>&, double, int);
+void timedproc(std::list<mokinysl>&, int);
+void timedprocwdel(std::list<mokinysl>&, int);
+//
 double vidurkissk(std::deque<double>&);
-void outputfile(std::deque<mokinysd>&, double);
-void skirstimas(std::deque<mokinysd>&, double&);
+void outputfile(std::deque<mokinysd>&);
+void skirstimas(std::deque<mokinysd>&);
+void skirstimasistrinant(std::deque<mokinysd>&);
+bool sortByLastNameD(mokinysd&, mokinysd&);
 void skaitymasfailo(std::deque<mokinysd>&, int);
-bool sortByLastNameD(const mokinysd&, const mokinysd&);
+void timedproc(std::deque<mokinysd>&, int);
+void timedprocwdel(std::deque<mokinysd>&, int);
+//
 double vidurkissk(std::vector<double>&);
-void outputfile(std::vector<mokinysv>&, double);
-void skirstimas(std::vector<mokinysv>&, double&);
-bool sortByLastNameV(const mokinysv&, const mokinysv&);
+void outputfile(std::vector<mokinysv>&);
+void skirstimas(std::vector<mokinysv>&);
+void skirstimasistrinant(std::vector<mokinysv>&);
+bool sortByLastNameV(mokinysv&, mokinysv&);
 void skaitymasfailo(std::vector<mokinysv>&, int);
+void timedproc(std::vector<mokinysv>&, int);
+void timedprocwdel(std::vector<mokinysv>&, int);
+//
 void generavimasfailo(int);
+void timedgen(int);
 #endif // !STUDENTAI_H
