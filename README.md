@@ -1,4 +1,18 @@
 # PirmasDarbas
+
+## Vertinimas
+
+**Pastabos:**
+
+- Reiktu i gitignore prideti kai kuriuos nereikalingus failus
+- Releasai turetu buti issamesni
+- Truksta eksperimentu ataskaitos README faile
+
+**Privalumai:**
+
+- Tvarginkas stilius ir kodas
+
+
 Pirmoji programa
 # [v0.1](https://github.com/EmilisDolgov/PirmasDarbas/releases/tag/v0.1)
 * Pradėta programa
