@@ -4,9 +4,9 @@
 
 **Pastabos:**
 
-- Reiktu i gitignore prideti kai kuriuos nereikalingus failus
-- Releasai turetu buti issamesni
-- Truksta eksperimentu ataskaitos README faile
+- [x] Reiktu i gitignore prideti kai kuriuos nereikalingus failus
+- [x] Releasai turetu buti issamesni
+- [x] Truksta eksperimentu ataskaitos README faile
 
 **Privalumai:**
 
@@ -34,3 +34,9 @@ Pirmoji programa
 * Programa optimizuota
 * Ištrintas rankinis output'as
 * Pridėta daugiau algoritmų, veikia daug greičiau.
+
+## Ataskaita
+Failo generavimas
+|10|100|1000|10000|100000|
+|--|---|----|-----|------|
+|0.00316715s|0.00542763s|0.0585664s|0.509385s|4.9661s|
