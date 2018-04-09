@@ -97,6 +97,7 @@ void timedproc(std::vector<mokinysv>& a, int n)
 	auto start = std::chrono::high_resolution_clock::now();
 	std::sort(a.begin(), a.end(), sortByLastNameV);
 	skirstimas(a);
+	a.clear();
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
@@ -108,6 +109,7 @@ void timedprocwdel(std::vector<mokinysv>& a, int n)
 	auto start = std::chrono::high_resolution_clock::now();
 	std::sort(a.begin(), a.end(), sortByLastNameV);
 	skirstimasistrinant(a);
+	a.clear();
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;

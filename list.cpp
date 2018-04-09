@@ -95,8 +95,9 @@ void timedproc(std::list<mokinysl>& a, int n)
 {
 	skaitymasfailo(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
-    //a.sort(sortByLastNameL);
+    a.sort(sortByLastNameL);
 	skirstimas(a);
+	a.clear();
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
@@ -106,8 +107,9 @@ void timedprocwdel(std::list<mokinysl>& a, int n)
 {
 	skaitymasfailo(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
-	//a.sort(sortByLastNameL);
+	a.sort(sortByLastNameL);
 	skirstimasistrinant(a);
+	a.clear();
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;

@@ -97,6 +97,7 @@ void timedproc(std::deque<mokinysd>& a, int n)
 	auto start = std::chrono::high_resolution_clock::now();
 	std::sort(a.begin(), a.end(), sortByLastNameD);
 	skirstimas(a);
+	a.clear();
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
@@ -108,6 +109,7 @@ void timedprocwdel(std::deque<mokinysd>& a, int n)
 	auto start = std::chrono::high_resolution_clock::now();
 	std::sort(a.begin(), a.end(), sortByLastNameD);
 	skirstimasistrinant(a);
+	a.clear();
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
