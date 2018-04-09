@@ -4,6 +4,7 @@ cmake-build-debug/
 .idea/
 *.vcxproj
 *.filters
+*.users
 *.rc
 *.aps
 *.txt
