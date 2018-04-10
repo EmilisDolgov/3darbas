@@ -11,6 +11,7 @@
 **Privalumai:**
 
 - Tvarginkas stilius ir kodas
+- VISKAS PATAISYTA, PUIKIAI
 
 
 Pirmoji programa
