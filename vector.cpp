@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "studentai.h"
+#include "Mokinys.h"
 #include <fstream>
 #include <iostream>
 #include <cmath>
@@ -11,7 +11,7 @@
 #include <vector>
 #include <chrono>
 
-double vidurkissk(std::vector<double>& paz)
+/*double vidurkissk(std::vector<double>& paz)
 {
 	double sum{};
 	for (auto i : paz)
@@ -114,4 +114,4 @@ void timedprocwdel(std::vector<mokinysv>& a, int n)
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
 	std::cout << "[V/2c]Duomenu suskirtimo ir isvedimo laikas: " << elapsed.count() << "s" << std::endl;
-}
+}*/

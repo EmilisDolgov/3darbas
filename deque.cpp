@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "studentai.h"
+#include "Mokinys.h"
 #include <fstream>
 #include <iostream>
 #include <cmath>
@@ -10,7 +10,7 @@
 #include <deque>
 #include <chrono>
 
-double vidurkissk(std::deque<double>& paz)
+/*double vidurkissk(std::deque<double>& paz)
 {
 	double sum{};
 	for (auto i : paz)
@@ -114,4 +114,4 @@ void timedprocwdel(std::deque<mokinysd>& a, int n)
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
 	std::cout << "[D/2c]Duomenu suskirtimo ir isvedimo laikas: " << elapsed.count() << "s" << std::endl;
-}
+}*/
