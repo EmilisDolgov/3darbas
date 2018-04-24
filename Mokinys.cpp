@@ -317,10 +317,7 @@ void generavimasfailo(int n)
 	std::uniform_int_distribution<> dis(1, 10);
 	for (auto i = 0; i < n; i++)
 	{
-		out << "Vardas" + std::to_string(i) << " ";
-		out << "Pavarde" + std::to_string(i) << " ";
-		out << dis(gen) << " " << dis(gen) << " " << dis(gen) << " " << dis(gen) << " " << dis(gen) << " ";
-		out << dis(gen) << std::endl;
+		out << "Vardas" + std::to_string(i) << " " << "Pavarde" + std::to_string(i) << " " << dis(gen) << " " << dis(gen) << " " << dis(gen) << " " << dis(gen) << " " << dis(gen) << " "<< dis(gen) << std::endl;
 	}
 	out.close();
 
