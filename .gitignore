@@ -13,3 +13,4 @@ stdafx.cpp
 stdafx.h
 resource.h
 desktop.ini
+*vcxproj.user
