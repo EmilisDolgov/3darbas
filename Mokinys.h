@@ -19,9 +19,10 @@ public:
 		vidurkis = 0;
 		galBal = 0;
 	};
-	Mokinys(std::string vard, std::string pava, double egza, double vid, double gB) {
+	/*Mokinys(std::string vard, std::string pava, double egza, double vid, double gB) {
 		vardas = vard; pavarde = pava; egz = egza; vidurkis = vid; galBal = gB;
-	};
+	};*/
+    Mokinys(std::istream& input);
 	std::string Vardas() { return vardas; };
 	std::string Pavarde() { return pavarde; };	
 	double Vidurkis() { return vidurkis; };
@@ -35,7 +36,6 @@ public:
 	{
 		return galBal > rhs.galBal;
 	};
-
 	inline bool operator==(const Mokinys& rhs) const
 	{
 		return galBal == rhs.galBal;

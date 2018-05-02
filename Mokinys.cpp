@@ -23,7 +23,44 @@ double vidurkissk(std::vector<double>& paz)
 	}
 	return sum / paz.size();
 }
-void skaitymasfailo(std::vector<Mokinys>& a, int n)
+Mokinys::Mokinys(std::istream& input) 
+{
+	input >> vardas >> pavarde;
+	for (auto i = 0; i < 5; i++) {
+		double t;
+		std::vector<double> temp;
+		input >> t;
+		temp.push_back(t);
+		vidurkis = vidurkissk(temp);
+	}
+	input >> egz;
+	galBal= 0.4*vidurkis + 0.6*egz;
+}
+void nskaitymasf(std::vector<Mokinys>& a, int n)
+{
+	Mokinys *b;
+	std::ifstream in("kursiokai" + std::to_string(n) + ".txt");
+	a.reserve(n);
+	try
+	{
+		if (!in.good()) throw 1;
+		else if (in.peek() == std::ifstream::traits_type::eof()) throw 0;
+	}
+	catch (int n)
+	{
+		if (n == 1)
+			std::cout << "Failas nerastas" << std::endl;
+		else if (n == 0)
+			std::cout << "Failas tuscias" << std::endl;
+	}
+	while (!in.eof()) {
+		b = new Mokinys(in);
+		if (in.eof()) break;
+		a.push_back(*b);
+
+	}
+}
+/*void skaitymasfailo(std::vector<Mokinys>& a, int n)
 {
 	std::ifstream in("kursiokai" + std::to_string(n) + ".txt");
 	Mokinys tempc;
@@ -57,12 +94,11 @@ void skaitymasfailo(std::vector<Mokinys>& a, int n)
 		egz = paz.back();
 		vidurkis = vidurkissk(paz);
 		galBal = 0.4*vidurkis + 0.6*egz;
-		Mokinys tempc(vardas, pavarde, egz, vidurkis, galBal);
-
+		//Mokinys tempc(vardas, pavarde, egz, vidurkis, galBal);
 		a.push_back(tempc);
 	}
 	in.close();
-}
+}*/
 void skirstimas(std::vector<Mokinys>& a)
 {
 	std::vector<Mokinys> neprileisti{};
@@ -98,7 +134,7 @@ void outputfile(std::vector<Mokinys>& a)
 }
 void timedproc(std::vector<Mokinys>& a, int n)
 {
-	skaitymasfailo(a, n);
+	nskaitymasf(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
 	sort(a.begin(), a.end(), greater());
 	skirstimas(a);
@@ -109,7 +145,7 @@ void timedproc(std::vector<Mokinys>& a, int n)
 }
 void timedprocwdel(std::vector<Mokinys>& a, int n)
 {
-	skaitymasfailo(a, n);
+	nskaitymasf(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
 	sort(a.begin(), a.end(),greater());
 	skirstimasistrinant(a);
