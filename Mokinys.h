@@ -2,9 +2,8 @@
 #define MOKINYS_H
 
 #include <string>
-#include <list>
 #include <vector>
-#include <deque>
+#include <iomanip>
 
 class Mokinys
 {
@@ -28,27 +27,44 @@ public:
 	double Vidurkis() { return vidurkis; };
 	double Egz() { return egz; };
 	double GalBal() { return galBal; };
+    inline bool operator<(const Mokinys& rhs) const 
+	{
+		return galBal < rhs.galBal;
+	};
+    inline bool operator>(const Mokinys& rhs) const
+	{
+		return galBal > rhs.galBal;
+	};
+
+	inline bool operator==(const Mokinys& rhs) const
+	{
+		return galBal == rhs.galBal;
+	}
+	inline bool operator!=(const Mokinys& rhs) const
+	{
+		return !operator==(rhs);
+	}
+	inline bool operator<=(const Mokinys& rhs) const
+	{
+		return galBal <= rhs.galBal;
+	}
+	inline bool operator>=(const Mokinys& rhs) const
+	{
+		return !operator<=(rhs);
+	}
+	inline friend std::ostream& operator<<(std::ostream& os, const Mokinys& obj)
+	{
+		os << obj.vardas << " " << obj.pavarde << " " << std::setprecision(2) << obj.galBal;
+		return os;
+	}
 
 };
-bool sortByLastName(Mokinys&,Mokinys&);
 void generavimasfailo(int);
 void timedgen(int);
-void OutputFile(std::list<Mokinys>&);
-void skirstimas(std::list<Mokinys>&);
-void skirstimasistrinant(std::list<Mokinys>&);
-void skaitymasfailo(std::list<Mokinys>&, int);
-void timedproc(std::list<Mokinys>&, int);
-void timedprocwdel(std::list<Mokinys>&, int);
 void OutputFile(std::vector<Mokinys>&);
 void skirstimas(std::vector<Mokinys>&);
 void skirstimasistrinant(std::vector<Mokinys>&);
 void skaitymasfailo(std::vector<Mokinys>&, int);
 void timedproc(std::vector<Mokinys>&, int);
 void timedprocwdel(std::vector<Mokinys>&, int);
-void OutputFile(std::deque<Mokinys>&);
-void skirstimas(std::deque<Mokinys>&);
-void skirstimasistrinant(std::deque<Mokinys>&);
-void skaitymasfailo(std::deque<Mokinys>&, int);
-void timedproc(std::deque<Mokinys>&, int);
-void timedprocwdel(std::deque<Mokinys>&, int);
-#endif // !MOKINYS_H
+#endif //!MOKINYS_H
