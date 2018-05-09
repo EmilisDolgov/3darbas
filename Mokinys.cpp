@@ -14,6 +14,10 @@ struct greater
 	template<class T>
 	bool operator()(T const &a, T const &b) const { return a > b; }
 };
+bool JeiNeprileistas(Mokinys& a)
+{
+	return a.GalBal() < 6;
+};
 double vidurkissk(std::vector<double>& paz)
 {
 	double sum{};
@@ -60,67 +64,18 @@ void nskaitymasf(std::vector<Mokinys>& a, int n)
 
 	}
 }
-/*void skaitymasfailo(std::vector<Mokinys>& a, int n)
-{
-	std::ifstream in("kursiokai" + std::to_string(n) + ".txt");
-	Mokinys tempc;
-	std::string vardas;
-	std::string pavarde;
-	double egz;
-	double vidurkis;
-	double galBal;
-	try
-	{
-		if (!in.good()) throw 1;
-		else if (in.peek() == std::ifstream::traits_type::eof()) throw 0;
-	}
-	catch (int n)
-	{
-		if (n == 1)
-			std::cout << "Failas nerastas" << std::endl;
-		else if (n == 0)
-			std::cout << "Failas tuscias" << std::endl;
-	}
-	for (auto i = 0; i<n; i++)
-	{
-		in >> vardas >> pavarde;
-		std::string line;
-		std::getline(in, line);
-		std::istringstream iss(line);
-		double temp;
-		std::vector<double> paz;
-		while (iss >> temp)
-			paz.push_back(temp);
-		egz = paz.back();
-		vidurkis = vidurkissk(paz);
-		galBal = 0.4*vidurkis + 0.6*egz;
-		//Mokinys tempc(vardas, pavarde, egz, vidurkis, galBal);
-		a.push_back(tempc);
-	}
-	in.close();
-}*/
 void skirstimas(std::vector<Mokinys>& a)
 {
-	std::vector<Mokinys> neprileisti{};
-	std::vector<Mokinys> prileisti{};
-	for (auto i : a)
-	{
-		if (i.Vidurkis() < 6)
-			neprileisti.push_back(i);
-		else if (i.Vidurkis() >= 6)
-			prileisti.push_back(i);
-	}
-
+	
+	auto it = std::partition(a.begin(), a.end(), JeiNeprileistas);
+	std::vector<Mokinys> neprileisti(a.begin(), it);
+	std::vector<Mokinys> prileisti(it, a.end());
 }
-bool JeiNeprileistas(Mokinys& a) 
-{ 
-	return a.Vidurkis() < 6; 
-};
 void skirstimasistrinant(std::vector<Mokinys>& a)
-{
-	std::vector<Mokinys> neprileisti{};
-	copy_if(a.begin(), a.end(), back_inserter(neprileisti), JeiNeprileistas);
-	a.erase(remove_if(a.begin(), a.end(), JeiNeprileistas), a.end());
+{	
+	auto it = std::partition(a.begin(), a.end(), JeiNeprileistas);
+	std::vector<Mokinys> neprileisti(a.begin(), it);
+	a.erase(a.begin(), it);
 }
 void outputfile(std::vector<Mokinys>& a)
 {
@@ -136,8 +91,8 @@ void timedproc(std::vector<Mokinys>& a, int n)
 {
 	nskaitymasf(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
-	sort(a.begin(), a.end(), greater());
 	skirstimas(a);
+	sort(a.begin(), a.end(), greater());
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;
@@ -147,8 +102,8 @@ void timedprocwdel(std::vector<Mokinys>& a, int n)
 {
 	nskaitymasf(a, n);
 	auto start = std::chrono::high_resolution_clock::now();
-	sort(a.begin(), a.end(),greater());
 	skirstimasistrinant(a);
+	sort(a.begin(), a.end(),greater());
 	outputfile(a);
 	auto finish = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> elapsed = finish - start;

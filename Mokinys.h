@@ -14,11 +14,7 @@ private:
 	double vidurkis;
 	double galBal;
 public:
-	Mokinys() {
-		egz = 0;
-		vidurkis = 0;
-		galBal = 0;
-	};
+
 	/*Mokinys(std::string vard, std::string pava, double egza, double vid, double gB) {
 		vardas = vard; pavarde = pava; egz = egza; vidurkis = vid; galBal = gB;
 	};*/
@@ -57,6 +53,7 @@ public:
 		os << obj.vardas << " " << obj.pavarde << " " << std::setprecision(2) << obj.galBal;
 		return os;
 	}
+	
 
 };
 void generavimasfailo(int);
@@ -64,7 +61,6 @@ void timedgen(int);
 void OutputFile(std::vector<Mokinys>&);
 void skirstimas(std::vector<Mokinys>&);
 void skirstimasistrinant(std::vector<Mokinys>&);
-void skaitymasfailo(std::vector<Mokinys>&, int);
 void timedproc(std::vector<Mokinys>&, int);
 void timedprocwdel(std::vector<Mokinys>&, int);
 #endif //!MOKINYS_H
