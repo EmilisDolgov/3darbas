@@ -1,4 +1,4 @@
-#ifndef MOKINYS_H
+﻿#ifndef MOKINYS_H
 #define MOKINYS_H
 
 #include <string>
@@ -14,40 +14,49 @@ private:
 	double vidurkis;
 	double galBal;
 public:
-
-	/*Mokinys(std::string vard, std::string pava, double egza, double vid, double gB) {
-		vardas = vard; pavarde = pava; egz = egza; vidurkis = vid; galBal = gB;
-	};*/
+	///Konstruktorius su paduodamu inputu
     Mokinys(std::istream& input);
+	///Funkcija grąžinanti vardą
 	std::string Vardas() { return vardas; };
-	std::string Pavarde() { return pavarde; };	
+	///Funkcija grąžinanti pavardę
+	std::string Pavarde() { return pavarde; };
+	///Funkcija grąžinanti vidurkį
 	double Vidurkis() { return vidurkis; };
+	///Funkcija grąžinanti egzamino įvertinimą
 	double Egz() { return egz; };
+	///Funkcija grąžinanti galutinį įvertinimą
 	double GalBal() { return galBal; };
+	///Palyginimo operatorius <
     inline bool operator<(const Mokinys& rhs) const 
 	{
 		return galBal < rhs.galBal;
 	};
+	///Palyginimo operatorius >
     inline bool operator>(const Mokinys& rhs) const
 	{
 		return galBal > rhs.galBal;
 	};
+	///Palyginimo operatorius ==
 	inline bool operator==(const Mokinys& rhs) const
 	{
 		return galBal == rhs.galBal;
 	}
+	///Palyginimo operatorius !=
 	inline bool operator!=(const Mokinys& rhs) const
 	{
 		return !operator==(rhs);
 	}
+	///Palyginimo operatorius <=
 	inline bool operator<=(const Mokinys& rhs) const
 	{
 		return galBal <= rhs.galBal;
 	}
+	///Palyginimo operatorius >=
 	inline bool operator>=(const Mokinys& rhs) const
 	{
 		return !operator<=(rhs);
 	}
+	///Outputo operatorius
 	inline friend std::ostream& operator<<(std::ostream& os, const Mokinys& obj)
 	{
 		os << obj.vardas << " " << obj.pavarde << " " << std::setprecision(2) << obj.galBal;

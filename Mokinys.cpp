@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Mokinys.h"
+#include "Vector.h"
 #include <fstream>
 #include <iostream>
 #include <cmath>
