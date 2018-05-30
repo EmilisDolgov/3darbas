@@ -47,3 +47,12 @@
  |---|---|---|---|---|---|
  |Pirma strategija|0.000972375s|0.00908503s|0.194644s|2.03342s|23.946s|
  |Antra strategija|0.00104192s|0.001264234s|0.146146s|1.93426s|23.2079s|
+
+# [v0.2](https://github.com/EmilisDolgov/OOP-AntrasDarbas/releases/tag/0.2)
+ * Realizuoti operatoriai
+ * Sukurta Doxygen dokumentacija
+ * Panaudotas std::partition/std::stable_partition
+ 
+# [v1.0](https://github.com/EmilisDolgov/OOP-AntrasDarbas/releases/tag/1.0)
+ * Sutvarkytas Git'as
+ 
